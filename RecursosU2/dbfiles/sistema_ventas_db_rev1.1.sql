@@ -78,3 +78,7 @@ INSERT INTO tbl_rol VALUES (2, 'Ventas', 'ventas', 1);
 INSERT INTO tbl_usuario(cveUsuario, nombre, apellidos, username, password, email) VALUES(1, 'Eric', 'Domenzain', 'admin', '$2a$10$cqPJ31ODV4fACLWsrrx4QeQeMNdSjhfDAL8qk8Xr.IhrRxrjrEP6q', 'ericdomenzain@gmail.com');
 
 INSERT INTO tbl_rol_usuario(cveRol, cveUsuario) VALUES(1, 1);
+
+ALTER USER 'admin'@'%' IDENTIFIED WITH mysql_native_password BY 'admin';
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
