@@ -1,5 +1,5 @@
 # Usar la imagen base de nginx
-FROM sistema-ventas-front:latest
+FROM nginx:stable-alpine
 
 # Crear volumen en /tmp 
 VOLUME /tmp
