@@ -205,6 +205,7 @@ git config --list
 <img src=\imagenes\HELLO.png>
 
 # 2.3.2 ARCHIVO .YML <a name="#232-yml"></a>
+<img src=\imagenes\yml.png>
 
 # 3 CONCLUSION <a name="#3-conclusion"></a>
 
