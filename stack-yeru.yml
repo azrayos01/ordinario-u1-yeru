@@ -45,7 +45,7 @@ services:
     build:
       context: ./angular
       dockerfile: Dockerfile
-    image: nginx:latest
+    image: nginx
     container_name: sistema-ventas-front
     ports:
       - "80:80"
