@@ -1,5 +1,3 @@
-
-
 services:
 
   mysql-db:
@@ -48,4 +46,6 @@ services:
       - "80:80"
     depends_on:
       - sistema-ventas-back
-    restart: unless-stopped 
+    restart: unless-stopped
+    volumes:
+      - /temp 
