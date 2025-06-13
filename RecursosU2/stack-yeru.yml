@@ -1,59 +1,45 @@
-# stack
-version: '3.8'
-
 services:
-  # Servicio MySQL
-  mysql-db:
-    image: mysql:8.0
-    container_name: mysql-db
-    ports:
-      - "3306:3306"
-    volumes:
-      - ./dbfiles:/docker-entrypoint-initdb.d  # Monta carpeta con scripts SQL
-    environment:
-      MYSQL_ROOT_PASSWORD: qwerty
-      MYSQL_DATABASE: sistema_ventas_db
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
-    restart: unless-stopped
-  
-  # Servicio phpMyAdmin 
   phpmyadmin:
-    image: phpmyadmin:latest
     container_name: phpmyadmin
+    image: phpmyadmin:latest
+    restart: always
     ports:
-      - "9090:80"
+      - 9090:80
     environment:
-      PMA_ARBITRARY: 1
-    depends_on:
-      - mysql-db
-    restart: unless-stopped
+      - PMA_ARBITRARY=1
 
- # Servicio Backend (Node.js)
-  backend:
+  mysql-db:
+    container_name: mysql-db
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports: 
+      - 3306:3306
+    volumes:
+      - ./dbfiles:/docker-entrypoint-initdb.d
+      - ./mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=qwerty
+      - MYSQL_DATABASE=sistema_ventas_db
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+
+  sistema-ventas-back:
     build:
       context: ./sistema-ventas-back
-      dockerfile: Dockerfile
-    container_name: backend
+    container_name: sistema-ventas-back
     ports:
-      - "8080:3000"
-    environment:
-      DB_HOST: mysql-db
-      DB_USER: admin
-      DB_PASSWORD: admin
-      DB_NAME: sistema_ventas_db
+      - 8080:3000
     depends_on:
       - mysql-db
-    restart: unless-stopped
 
-  # Servicio Frontend (Angular)
-  frontend:
+  sistema-ventas-front:
     build:
       context: ./angular
-      dockerfile: Dockerfile
-    container_name: frontend
+    container_name: sistema-ventas-front
     ports:
-      - "80:80"
+      - 80:80
     depends_on:
-      - backend
-    restart: unless-stopped 
+      - sistema-ventas-back
+    volumes:
+      - /temp
