@@ -4,7 +4,7 @@ services:
     image: phpmyadmin:latest
     restart: always
     ports:
-      - "9090:80"
+      - 9090:80
     environment:
       - PMA_ARBITRARY=1
 
@@ -14,7 +14,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     ports: 
-      - "3306:3306"
+      - 3306:3306
     volumes:
       - ./dbfiles:/docker-entrypoint-initdb.d
       - ./mysql_data:/var/lib/mysql
@@ -29,7 +29,7 @@ services:
       context: ./sistema-ventas-back
     container_name: sistema-ventas-back
     ports:
-      - "8080:3000"
+      - 8080:3000
     depends_on:
       - mysql-db
 
@@ -38,7 +38,7 @@ services:
       context: ./angular
     container_name: sistema-ventas-front
     ports:
-      - "80:80"
+      - 80:80
     depends_on:
       - sistema-ventas-back
     volumes:

@@ -12,10 +12,10 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY mime.types /etc/nginx/mime.types
 
 # Copiar el directorio del frontend Angular ya compilado
-COPY sistema-ventas-front /usr/share/nginx/html
+COPY sistema-ventas-front/ /usr/share/nginx/html/
 
 # Exponer puerto 80
-EXPOSE "80"
+EXPOSE 80
 
 # Comando para mantener nginx en ejecución en primer plano
-CMD ["nginx", "-g", "daemon off;"]
+CMD [ "nginx", "-g", "daemon off;" ]
