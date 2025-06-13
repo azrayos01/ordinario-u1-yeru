@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Exponer puerto 3000
-EXPOSE 3000
+EXPOSE "3000"
 
 # Comando para iniciar la aplicación
 CMD ["node", "index.js"]

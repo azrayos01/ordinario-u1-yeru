@@ -15,7 +15,7 @@ COPY mime.types /etc/nginx/mime.types
 COPY sistema-ventas-front /usr/share/nginx/html
 
 # Exponer puerto 80
-EXPOSE 80
+EXPOSE "80"
 
 # Comando para mantener nginx en ejecución en primer plano
 CMD ["nginx", "-g", "daemon off;"]
